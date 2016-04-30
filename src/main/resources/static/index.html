@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" >
+  <head>
+    <title>JUGVale MongoDB + Java Exemplo</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+    <link rel="stylesheet" href="../bower_components/angular-material/angular-material.css"/>
+    <link rel="stylesheet" href="assets/app.css"/>
+
+    <style type="text/css">
+        /**
+         * Hide when Angular is not yet loaded and initialized
+         */
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+          display: none !important;
+        }
+    </style>
+  </head>
+
+  <body ng-app="starterApp" layout="column" ng-controller="CustomerController as ul" ng-cloak>
+    <md-toolbar layout="row">
+      <md-button class="menu" hide-gt-sm ng-click="ul.toggleList()" aria-label="Show Customer List">
+        <md-icon md-svg-icon="menu" ></md-icon>
+      </md-button>
+      <h1 style="margin-left: 10px">JUGVale MongoDB + Java Exemplo</h1>
+    </md-toolbar>
+
+    <div flex layout="row">
+        <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" class="md-whiteframe-z2" >
+          <div style="overflow: auto;">
+            <md-list>
+              <md-list-item ng-repeat="it in ul.customers">
+                  <md-button>
+                    <md-icon md-svg-icon="svg-1" class="avatar"></md-icon>
+                    {{it.name}}
+                  </md-button>
+              </md-list-item>
+            </md-list>
+          </div>  
+
+          <div style="border-top: 1px dashed #000; overflow-x: hidden; padding: 10px;">
+            <md-input-container class="md-block">
+              <label>Nome</label>
+              <input ng-model="ul.newCustomerName">
+            </md-input-container>
+
+            <div layout-gt-sm="row">
+              <md-input-container class="md-block" flex-gt-sm>
+                <label>Longitude</label>
+                <input ng-model="ul.marker.coords.latitude" readonly>
+              </md-input-container>
+              <md-input-container class="md-block" flex-gt-sm>
+                <label>Latitude</label>
+                <input ng-model="ul.marker.coords.longitude" readonly>
+              </md-input-container>
+            </div>
+
+            <md-button class="md-raised md-warn" ng-click="ul.newCustomer()">Criar novo Cliente</md-button>
+          </div>
+        </md-sidenav>
+
+        <md-content flex id="content">
+          <ui-gmap-google-map center='ul.map.center' zoom='ul.map.zoom'>
+            <ui-gmap-marker coords="ul.marker.coords" options="ul.marker.options" events="ul.marker.events" idkey="ul.marker.id" bounds="ul.map.bounds">
+            </ui-gmap-marker>
+
+            <ui-gmap-markers models="ul.customers" coords="'self'"  events="ul.marker.events">
+            </ui-gmap-markers>
+          </ui-gmap-google-map>
+        </md-content>
+    </div>
+
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.js"></script>
+    <script src="../bower_components/angular-aria/angular-aria.js"></script>
+    <script src="../bower_components/lodash/dist/lodash.min.js"></script>
+    <script src="../bower_components/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
+    <script src="../bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
+    <script src="../bower_components/angular-material/angular-material.js"></script>
+    <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+
+    <script src="./src/customers/Customers.js"></script>
+    <script src="./src/customers/CustomerController.js"></script>
+    <script src="./src/customers/CustomerService.js"></script>
+
+    <script type="text/javascript">
+          angular
+              .module('starterApp', ['ngMaterial', 'customers', 'uiGmapgoogle-maps'])
+              .config(function($mdThemingProvider, $mdIconProvider){
+                  $mdIconProvider
+                      .defaultIconSet("./assets/svg/avatars.svg", 128)
+                      .icon("menu"       , "./assets/svg/menu.svg"        , 24);
+
+                      $mdThemingProvider.theme('default')
+                          .primaryPalette('brown')
+                          .accentPalette('red');
+              });
+    </script>
+
+  </body>
+</html>
