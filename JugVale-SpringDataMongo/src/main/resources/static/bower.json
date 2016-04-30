@@ -1,0 +1,27 @@
+{
+  "name": "frontend_jugvale",
+  "version": "0.1.0",
+  "authors": [
+    "Gabriel Matos <gabrielbiga@me.com>"
+  ],
+  "description": "Just a MongoDB + Java + Angular test",
+  "main": "index.html",
+  "license": "GPL",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.5",
+    "angular-animate": "^1.5.5",
+    "angular-aria": "^1.5.5",
+    "angular-messages": "^1.5.5",
+    "angular-material": "git+ssh://git@github.com/angular/bower-material.git#master",
+    "angular-google-maps": "^2.3.2",
+    "lodash": "^4.11.2",
+    "angular-simple-logger": "^0.1.7"
+  }
+}
