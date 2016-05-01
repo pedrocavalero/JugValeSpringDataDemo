@@ -23,6 +23,13 @@ public class Customer {
     }
 
 
+	public Customer(String firstName, String lastName, double[] location) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.location = location;
+	}
+
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", location="
